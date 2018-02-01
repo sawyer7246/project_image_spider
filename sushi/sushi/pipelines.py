@@ -11,12 +11,14 @@ import os
 import time
 import random
 from sushi.items import *
+import re
 urllib.disable_warnings(urllib.exceptions.InsecureRequestWarning)
 
 
 class SushiPipeline(object):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0'}
-    img_path = 'D:\STUDY_SOURCE\sushi\img'
+    img_path_labelled = 'D:\STUDY_SOURCE\sushi\img_1\labeled'
+    img_path_unlabelled = 'D:\STUDY_SOURCE\sushi\img_1\\unlabelled'
     shop_file_path = 'D:\STUDY_SOURCE\sushi\shops.jl'
     img_file_path = 'D:\STUDY_SOURCE\sushi\images.jl'
 
@@ -48,8 +50,12 @@ class SushiPipeline(object):
         for image_url in image_urls:
             time.sleep(random.randint(1, 5))
             res = http.request('GET', image_url['img_url'])
-            print(image_url['img_url'] + '-' + str(res.status))
-            file_name = os.path.join(self.img_path, image_url['name']+'_'+str(hash(image_url['img_url'])) + '.jpg')
+            # print(image_url['img_url'] + '-' + str(res.status))
+            sushi_name = self.validate_title(image_url['name'])
+            sushi_hash = str(hash(image_url['img_url']))
+            file_name = os.path.join(self.img_path_labelled, sushi_name)+'_'+ sushi_hash + '.jpg'
+            if not self.is_labelled(sushi_name):
+                file_name = os.path.join(self.img_path_unlabelled, sushi_name)+'_'+ sushi_hash + '.jpg'
             with open(file_name, 'wb') as fp:
                 fp.write(res.data)
 
@@ -62,3 +68,15 @@ class SushiPipeline(object):
             return self.handleShop(item, spider)
         if isinstance(item, Images):
             return self.handleImage(item, spider)
+
+    def validate_title(self, title):
+        rstr = r"[\/\\\:\*\?\"\<\>\|]"  # '/ \ : * ? " < > |'
+        new_title = re.sub(rstr, "_", title)  # 替换为下划线
+        return new_title
+
+    def is_labelled(self, title):
+        arr = re.split('[-]', title)
+        if arr[1] is None or arr[1].strip() == '':
+            return False
+        else:
+            return True

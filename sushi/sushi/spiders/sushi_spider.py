@@ -8,7 +8,7 @@ class SushiSpider(scrapy.Spider):
 
     def start_requests(self):
         urls = [
-            'https://tabelog.com/cn/rstLst/1/?lat=36.2088&lon=137.6367&zoom=12&RdoCosTp=2&LstCos=0&LstCosT=12&LstSitu'
+            'https://tabelog.com/cn/rstLst/7/?lat=36.2088&lon=137.6367&zoom=12&RdoCosTp=2&LstCos=0&LstCosT=12&LstSitu'
             '=0&LstRev=0&LstReserve=0&ChkParking=0&LstSmoking=0&SrtT=rt&LstCatSD=RC010202&LstCatD=RC0102&LstCat=RC01'
             '&Cat=RC',
         ]
