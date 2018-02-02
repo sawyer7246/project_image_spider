@@ -34,7 +34,6 @@ class SushiPipeline(object):
     FLUSH_PARA = 3
     COUNT = 1
 
-
     DATE_STR = ""
 
     user_agent_list = [
