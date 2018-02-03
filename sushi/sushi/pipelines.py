@@ -19,14 +19,15 @@ urllib.disable_warnings(urllib.exceptions.InsecureRequestWarning)
 
 
 class SushiPipeline(object):
-    img_path_labelled = 'D:\STUDY_SOURCE\sushi\img_{0}\labeled\\'
-    img_path_unlabelled = 'D:\STUDY_SOURCE\sushi\img_{0}\\unlabelled\\'
-    shop_file_path = 'D:\STUDY_SOURCE\sushi\img_{0}\\'
+    root_path = '../data/'
+    img_path_labelled = root_path+'sushi/img_{0}/labeled/'
+    img_path_unlabelled = root_path+'sushi/img_{0}/unlabelled/'
+    shop_file_path = root_path+'sushi/img_{0}/'
     shop_file_name = 'shops.jl'
-    img_file_path = 'D:\STUDY_SOURCE\sushi\img_{0}\\'
+    img_file_path = root_path+'sushi/img_{0}/'
     img_file_name = 'images.jl'
 
-    seen_urls_path = 'D:\STUDY_SOURCE\sushi\\'
+    seen_urls_path = root_path+'sushi/'
     seen_urls_name = 'visted_url.lines'
 
     SLEEP_TIME = 5
