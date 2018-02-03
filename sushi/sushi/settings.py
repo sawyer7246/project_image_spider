@@ -37,6 +37,8 @@ DOWNLOAD_DELAY = 5
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
+LOG_FILE = "mySpider.log"
+LOG_LEVEL = "INFO"
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
